@@ -1,0 +1,20 @@
+JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+CLASSES = \
+	Color.java \
+	Job.java \
+	jobscheduler.java \
+	MinHeap.java \
+	RedBlackNode.java \
+	RedBlackTree.java 
+
+default: classes
+
+classes: $(CLASSES:.java=.class)
+
+clean: 
+	$(RM) *.class
