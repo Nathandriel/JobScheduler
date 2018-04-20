@@ -102,6 +102,7 @@ public class jobscheduler {
                         RedBlackNode node = res.get(i);
                         jobInfo.append(node.getJob().toString());
                     }
+		    if (res.isEmpty()) jobInfo.append("(0,0,0)");
                     jobInfo.append("\n");
                     break;
                 }
@@ -109,7 +110,7 @@ public class jobscheduler {
 
             try {
                 Job job = jobQueue.removeJob();
-                executeJob(job);
+                if (job != null) executeJob(job);
             } catch (NoSuchElementException e) {
                 System.out.println("No jobs in queue");
             }
