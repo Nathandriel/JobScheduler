@@ -115,9 +115,10 @@ public class RedBlackTree {
                  * LR => RR + LL
                  * rotation => rotateLeft followed by rotateRight
                  */
-                else if (node == node.getParent().getRight()) {
-                    node = node.getParent();
-                    rotateLeft(node);
+                else {
+			if (node == node.getParent().getRight()) {
+                   	 node = node.getParent();
+                   	 rotateLeft(node);
                 }
 
                 /**
@@ -125,7 +126,7 @@ public class RedBlackTree {
                  * LL imbalance
                  * rotation => rotateRight
                  */
-                else {
+                
                     node.getParent().setColor(Color.BLACK);
                     node.getParent().getParent().setColor(Color.RED);
                     rotateRight(node.getParent().getParent());
@@ -154,9 +155,10 @@ public class RedBlackTree {
                  * RL =>  LL + RR
                  * rotation => rotateRight followed by rotateLeft
                  */
-                else if (node == node.getParent().getLeft()) {
-                    node = node.getParent();
-                    rotateRight(node);
+                else {
+			if (node == node.getParent().getLeft()) {
+                   	 node = node.getParent();
+                  	 rotateRight(node);
 
                 }
                 /**
@@ -165,7 +167,7 @@ public class RedBlackTree {
                  * rotation => rotateLeft
                  */
 
-                else {
+                
                     node.getParent().setColor(Color.BLACK);
                     node.getParent().getParent().setColor(Color.RED);
                     rotateLeft(node.getParent().getParent());
@@ -330,7 +332,7 @@ public class RedBlackTree {
         violationNode.getParent().setColor(Color.BLACK);
         uncleNode.setColor(Color.BLACK);
         violationNode.getParent().getParent().setColor(Color.RED);
-        violationNode = uncleNode.getParent().getParent();
+        violationNode = violationNode.getParent().getParent();
         return violationNode;
 
     }
@@ -349,7 +351,7 @@ public class RedBlackTree {
             y = node;
         }
         else {
-            y = getSuccessor(node);
+            y = getSmallestInTree(node.getRight());
         }
 
         if (!isSentinel(y.getLeft())) {
@@ -585,6 +587,7 @@ public class RedBlackTree {
      */
     public RedBlackNode getNextJobUtil(RedBlackNode subroot, RedBlackNode parent, int jobid) {
         if (isSentinel(subroot)) {
+	    if (parent == null) return null;
             if (parent.getJob().jobID > jobid) return parent;
             return getSuccessor(parent);
         }
@@ -599,6 +602,7 @@ public class RedBlackTree {
      */
     public RedBlackNode getPreviousJobUtil(RedBlackNode subroot, RedBlackNode parent, int jobid) {
         if (isSentinel(subroot)) {
+	    if (parent == null) return null;
             if (parent.getJob().jobID < jobid) return parent;
             return getPredecessor(parent);
         }
