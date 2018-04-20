@@ -88,7 +88,7 @@ public class MinHeap {
      */
     private boolean isLeaf(int i) {
 
-        return ((i >= (jobs.size() / 2)) && (i <= jobs.size()));
+        return ((i > (jobs.size() / 2)) && (i <= jobs.size()));
     }
 
     /**
@@ -97,7 +97,7 @@ public class MinHeap {
     private void minHeapify(int i) {
 
         if (!isLeaf(i)) {
-            if ((jobs.get(i).getExecutedTime() > jobs.get(getLeftChild(i)).getExecutedTime()) || (jobs.get(i).getExecutedTime() > jobs.get(getRightChild(i)).getExecutedTime())) {
+             if ((getLeftChild(i)< jobs.size() && jobs.get(i).getExecutedTime() > jobs.get(getLeftChild(i)).getExecutedTime()) || (getRightChild(i) < jobs.size() && jobs.get(i).getExecutedTime() > jobs.get(getRightChild(i)).getExecutedTime()))  {
                 if (jobs.get(i).getExecutedTime() > jobs.get(getLeftChild(i)).getExecutedTime()) {
                     swapElements(i, getLeftChild(i));
                     minHeapify(getLeftChild(i));
